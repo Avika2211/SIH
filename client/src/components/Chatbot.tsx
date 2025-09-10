@@ -51,7 +51,7 @@ export default function Chatbot({ isOpen, onClose }: ChatbotProps) {
     }
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
       handleSendMessage();
     }
@@ -60,7 +60,7 @@ export default function Chatbot({ isOpen, onClose }: ChatbotProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed bottom-20 right-6 w-80 h-96 bg-card/95 backdrop-blur-sm border border-border rounded-2xl shadow-2xl z-50 flex flex-col bounce-in hover-glow" data-testid="chatbot-overlay">
+    <div className="fixed bottom-24 right-6 w-[calc(100%-1rem)] sm:w-80 h-[60vh] sm:h-96 bg-card/95 backdrop-blur-sm border border-border rounded-2xl shadow-2xl z-40 flex flex-col bounce-in hover-glow" data-testid="chatbot-overlay">
       <div className="bg-gradient-to-r from-primary to-secondary text-primary-foreground p-4 rounded-t-2xl flex items-center justify-between pulse-glow">
         <div className="flex items-center space-x-3 fade-in-left animate">
           <div className="w-8 h-8 bg-primary-foreground/20 rounded-full flex items-center justify-center heartbeat">
@@ -119,7 +119,7 @@ export default function Chatbot({ isOpen, onClose }: ChatbotProps) {
             placeholder="✨ Type your message..."
             value={inputMessage}
             onChange={(e) => setInputMessage(e.target.value)}
-            onKeyPress={handleKeyPress}
+            onKeyDown={handleKeyDown}
             className="flex-1 text-sm hover-glow"
             data-testid="input-chatbot-message"
           />
