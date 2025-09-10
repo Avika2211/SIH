@@ -27,11 +27,11 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8 fade-in-left animate">
               <div className="space-y-4">
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight typewriter">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight typewriter royal-heading">
                   Empowering Students,
-                  <span className="text-primary shimmer"> Enabling Success</span>
+                  <span className="text-primary shimmer elegant-text"> Enabling Success</span>
                 </h1>
-                <p className="text-lg text-muted-foreground leading-relaxed">
+                <p className="text-lg text-muted-foreground leading-relaxed supportive-text">
                   VidyaGrid helps schools and students stay connected, track academic progress, and access personalized counseling through AI-driven insights — for brighter futures and stronger communities.
                 </p>
               </div>
@@ -87,10 +87,10 @@ export default function HomePage() {
       <section className="py-20 px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 fade-in-up animate">
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4 typewriter">
+            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4 typewriter royal-heading">
               🚀 AI-Powered Student Success
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto shimmer">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto shimmer supportive-text">
               Combining advanced analytics with compassionate support to ensure no student is left behind.
             </p>
           </div>
@@ -99,22 +99,22 @@ export default function HomePage() {
               <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-6 bounce-in">
                 <div className="w-6 h-6 bg-primary rounded heartbeat">📊</div>
               </div>
-              <h3 className="text-xl font-semibold text-card-foreground mb-4">🔮 Predictive Analytics</h3>
-              <p className="text-muted-foreground">AI-driven insights identify at-risk students early, enabling timely interventions.</p>
+              <h3 className="text-xl font-semibold text-card-foreground mb-4 educational-text">🔮 Predictive Analytics</h3>
+              <p className="text-muted-foreground supportive-text">AI-driven insights identify at-risk students early, enabling timely interventions.</p>
             </div>
             <div className="bg-card/90 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-border card-3d hover-glow pulse-glow" data-testid="card-feature-counseling">
               <div className="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center mb-6 bounce-in">
                 <div className="w-6 h-6 bg-secondary rounded heartbeat">💝</div>
               </div>
-              <h3 className="text-xl font-semibold text-card-foreground mb-4">🎯 Personalized Counseling</h3>
-              <p className="text-muted-foreground">Tailored guidance and resources to support each student's unique needs.</p>
+              <h3 className="text-xl font-semibold text-card-foreground mb-4 educational-text">🎯 Personalized Counseling</h3>
+              <p className="text-muted-foreground supportive-text">Tailored guidance and resources to support each student's unique needs.</p>
             </div>
             <div className="bg-card/90 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-border card-3d hover-glow pulse-glow" data-testid="card-feature-support">
               <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-6 bounce-in">
                 <div className="w-6 h-6 bg-primary rounded heartbeat">⚡</div>
               </div>
-              <h3 className="text-xl font-semibold text-card-foreground mb-4">🌟 Real-time Support</h3>
-              <p className="text-muted-foreground">24/7 AI chatbot provides immediate assistance and emotional support.</p>
+              <h3 className="text-xl font-semibold text-card-foreground mb-4 educational-text">🌟 Real-time Support</h3>
+              <p className="text-muted-foreground supportive-text">24/7 AI chatbot provides immediate assistance and emotional support.</p>
             </div>
           </div>
         </div>
@@ -129,28 +129,28 @@ export default function HomePage() {
                 <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center pulse-glow">
                   <span className="text-primary-foreground font-bold text-lg heartbeat">🎓</span>
                 </div>
-                <span className="text-xl font-semibold text-card-foreground shimmer">VidyaGrid</span>
+                <span className="text-xl font-semibold text-card-foreground shimmer royal-heading">VidyaGrid</span>
               </div>
-              <p className="text-muted-foreground">✨ Empowering students and enabling success through AI-driven insights and compassionate support.</p>
+              <p className="text-muted-foreground supportive-text">✨ Empowering students and enabling success through AI-driven insights and compassionate support.</p>
             </div>
             <div className="fade-in-up animate">
-              <h4 className="font-semibold text-card-foreground mb-4 bounce-in">🚀 Platform</h4>
-              <ul className="space-y-2 text-muted-foreground">
+              <h4 className="font-semibold text-card-foreground mb-4 bounce-in elegant-text">🚀 Platform</h4>
+              <ul className="space-y-2 text-muted-foreground premium-text">
                 <li><a href="#" className="hover:text-foreground transition-smooth hover-glow">🌟 Features</a></li>
                 <li><a href="#" className="hover:text-foreground transition-smooth hover-glow">🔒 Security</a></li>
                 <li><a href="#" className="hover:text-foreground transition-smooth hover-glow">⚡ Integration</a></li>
               </ul>
             </div>
             <div className="fade-in-up animate">
-              <h4 className="font-semibold text-card-foreground mb-4 bounce-in">💖 Support</h4>
-              <ul className="space-y-2 text-muted-foreground">
+              <h4 className="font-semibold text-card-foreground mb-4 bounce-in elegant-text">💖 Support</h4>
+              <ul className="space-y-2 text-muted-foreground premium-text">
                 <li><a href="#" className="hover:text-foreground transition-smooth hover-glow">📚 Documentation</a></li>
                 <li><a href="#" className="hover:text-foreground transition-smooth hover-glow">🆘 Help Center</a></li>
                 <li><a href="#" className="hover:text-foreground transition-smooth hover-glow">📞 Contact Us</a></li>
               </ul>
             </div>
             <div className="fade-in-up animate">
-              <h4 className="font-semibold text-card-foreground mb-4 bounce-in">⚖️ Legal</h4>
+              <h4 className="font-semibold text-card-foreground mb-4 bounce-in elegant-text">⚖️ Legal</h4>
               <ul className="space-y-2 text-muted-foreground">
                 <li><a href="#" className="hover:text-foreground transition-smooth hover-glow">🛡️ Privacy Policy</a></li>
                 <li><a href="#" className="hover:text-foreground transition-smooth hover-glow">📋 Terms of Service</a></li>
@@ -159,7 +159,7 @@ export default function HomePage() {
             </div>
           </div>
           <div className="border-t border-border mt-8 pt-8 text-center text-muted-foreground fade-in-up animate">
-            <p className="shimmer">© 2024 VidyaGrid. All rights reserved. 💫 Made with love for students everywhere!</p>
+            <p className="shimmer premium-text">© 2024 VidyaGrid. All rights reserved. 💫 Made with love for students everywhere!</p>
           </div>
         </div>
       </footer>
