@@ -42,7 +42,7 @@ export default function AdminDashboard() {
               <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center pulse-glow heartbeat">
                 <span className="text-primary-foreground font-bold">🛠️</span>
               </div>
-              <span className="text-lg font-semibold shimmer">🚀 VidyaGrid Admin</span>
+              <span className="text-lg font-semibold shimmer royal-heading">🚀 VidyaGrid Admin</span>
             </div>
             <Button 
               variant="ghost"
@@ -58,8 +58,8 @@ export default function AdminDashboard() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
         <div className="mb-8 fade-in-up animate">
-          <h1 className="text-3xl font-bold text-foreground mb-2 typewriter" data-testid="text-dashboard-title">📊 Dashboard Overview</h1>
-          <p className="text-muted-foreground shimmer">Monitor student progress and at-risk indicators with AI-powered insights</p>
+          <h1 className="text-3xl font-bold text-foreground mb-2 typewriter royal-heading" data-testid="text-dashboard-title">📊 Dashboard Overview</h1>
+          <p className="text-muted-foreground shimmer supportive-text">Monitor student progress and at-risk indicators with AI-powered insights</p>
         </div>
 
         {/* Stats Cards */}

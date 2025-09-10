@@ -67,8 +67,8 @@ export default function Chatbot({ isOpen, onClose }: ChatbotProps) {
             <span className="text-sm">🤖</span>
           </div>
           <div>
-            <h3 className="font-semibold shimmer">✨ VidyaBot</h3>
-            <p className="text-xs opacity-80">💖 Your AI learning companion</p>
+            <h3 className="font-semibold shimmer elegant-text">✨ VidyaBot</h3>
+            <p className="text-xs opacity-80 premium-text">💖 Your AI learning companion</p>
           </div>
         </div>
         <Button 

@@ -53,7 +53,7 @@ export default function StudentDashboard() {
               <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center pulse-glow heartbeat">
                 <span className="text-primary-foreground font-bold">🎓</span>
               </div>
-              <span className="text-lg font-semibold shimmer">✨ My Learning Journey</span>
+              <span className="text-lg font-semibold shimmer royal-heading">✨ My Learning Journey</span>
             </div>
             <Button 
               variant="ghost"
@@ -69,10 +69,10 @@ export default function StudentDashboard() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
         <div className="mb-8 fade-in-up animate">
-          <h1 className="text-3xl font-bold text-foreground mb-2 typewriter">
-            🌟 Welcome back, <span data-testid="text-student-name" className="shimmer">Alex</span>! 🎓
+          <h1 className="text-3xl font-bold text-foreground mb-2 typewriter royal-heading">
+            🌟 Welcome back, <span data-testid="text-student-name" className="shimmer elegant-text">Alex</span>! 🎓
           </h1>
-          <p className="text-muted-foreground bounce-in">Track your progress and access personalized support with AI-powered insights</p>
+          <p className="text-muted-foreground bounce-in supportive-text">Track your progress and access personalized support with AI-powered insights</p>
         </div>
 
         {/* Progress Overview */}

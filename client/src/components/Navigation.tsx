@@ -12,7 +12,7 @@ export default function Navigation() {
             <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center pulse-glow heartbeat">
               <span className="text-primary-foreground font-bold text-lg">🎓</span>
             </div>
-            <span className="text-xl font-semibold text-foreground shimmer">VidyaGrid</span>
+            <span className="text-xl font-semibold text-foreground shimmer royal-heading">VidyaGrid</span>
           </div>
           <div className="hidden md:flex items-center space-x-8 bounce-in">
             <a href="#home" className="text-muted-foreground hover:text-foreground transition-smooth hover-glow">🏠 Home</a>
