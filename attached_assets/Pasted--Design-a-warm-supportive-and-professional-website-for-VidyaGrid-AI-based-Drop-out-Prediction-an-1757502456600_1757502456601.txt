@@ -1,0 +1,78 @@
+“Design a warm, supportive, and professional website for VidyaGrid – AI-based Drop-out Prediction and Counseling System. The overall feel should be comforting and student-friendly using earth-tone colors like soft greens, warm browns, beige, and cream. The website must be modern, clean, and intuitive while conveying empathy, trust, and encouragement.
+
+✅ Home Page
+
+Logo: VidyaGrid
+
+Tagline examples:
+‘Empowering Students, Enabling Success’ or
+‘Together We Learn, Together We Grow.’
+
+Short description:
+“VidyaGrid helps schools and students stay connected, track academic progress, and access personalized counseling through AI-driven insights — for brighter futures and stronger communities.”
+
+Two clear buttons:
+➤ Admin Login
+➤ Student Login
+
+Illustrations in earth tones showing collaboration, growth charts, and care networks.
+
+Footer with contact information, privacy policy, and social media links.
+
+✅ Login Page
+
+Simple, calming interface with soft backgrounds and gentle transitions.
+
+Fields for username/email and password.
+
+Links for ‘Forgot Password’ and ‘Create Account’.
+
+Warm, minimal design to reduce stress and encourage use.
+
+✅ Admin Dashboard
+
+Dropout risk overview with charts and graphs.
+
+List of at-risk students with counseling suggestions.
+
+Notifications and alerts for timely interventions.
+
+Data insights explained in clear visual formats.
+
+Accessible reports export and role-based privacy controls.
+
+✅ Student Dashboard
+
+Personalized progress report with attendance, grades, and risk score.
+
+Counseling suggestions and helpful resources.
+
+A Chatbot button clearly visible on the screen that, when clicked, opens a fully functional chatbot window.
+
+The chatbot should provide empathetic guidance, answer student questions, help with academic concerns, and assist with emotional support.
+
+It should be interactive, responsive, and easy to use without needing to leave the dashboard.
+
+Friendly and supportive interface that encourages students to seek help when needed.
+
+✅ Design Style
+
+Earth-tone colors: soft green, brown, beige, cream.
+
+Rounded edges, soft shadows, and smooth transitions for a calming feel.
+
+Plenty of whitespace for readability and comfort.
+
+Clean typography that is approachable and professional.
+
+A warm, welcoming experience that builds trust and motivation.
+
+✅ Special Notes
+
+The chatbot feature must be fully integrated within the student dashboard, not as a separate page but as a pop-up or overlay that stays accessible.
+
+The chatbot should feel like a real-time assistant and should not disrupt the user’s workflow.
+
+The platform must emphasize security, privacy, and ease of use across all interfaces.
+
+The website should reflect VidyaGrid’s mission: supporting students, empowering schools, and ensuring no student is left behind — all through compassionate technology.”
