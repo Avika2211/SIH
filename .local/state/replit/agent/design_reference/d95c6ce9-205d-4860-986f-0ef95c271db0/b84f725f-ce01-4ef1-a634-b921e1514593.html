@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VidyaGrid - Empowering Students, Enabling Success</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/heroicons@2.0.16/24/outline/index.js" type="module"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                borderRadius: {
+                    lg: "var(--radius)",
+                    md: "calc(var(--radius) - 2px)",
+                    sm: "calc(var(--radius) - 4px)",
+                },
+                colors: {
+                    background: "var(--background)",
+                    foreground: "var(--foreground)",
+                    card: {
+                        DEFAULT: "var(--card)",
+                        foreground: "var(--card-foreground)",
+                    },
+                    primary: {
+                        DEFAULT: "var(--primary)",
+                        foreground: "var(--primary-foreground)",
+                    },
+                    secondary: {
+                        DEFAULT: "var(--secondary)",
+                        foreground: "var(--secondary-foreground)",
+                    },
+                    muted: {
+                        DEFAULT: "var(--muted)",
+                        foreground: "var(--muted-foreground)",
+                    },
+                    accent: {
+                        DEFAULT: "var(--accent)",
+                        foreground: "var(--accent-foreground)",
+                    },
+                    border: "var(--border)",
+                    input: "var(--input)",
+                    ring: "var(--ring)",
+                },
+                fontFamily: {
+                    sans: ["Inter", "sans-serif"],
+                }
+            },
+        }
+    };
+    </script>
+    <style>
+        :root {
+            --background: hsl(45 20% 98%);
+            --foreground: hsl(25 45% 15%);
+            --card: hsl(42 15% 96%);
+            --card-foreground: hsl(25 45% 15%);
+            --primary: hsl(95 15% 55%);
+            --primary-foreground: hsl(45 20% 98%);
+            --secondary: hsl(35 25% 65%);
+            --secondary-foreground: hsl(25 45% 15%);
+            --muted: hsl(42 15% 92%);
+            --muted-foreground: hsl(25 25% 45%);
+            --accent: hsl(45 35% 92%);
+            --accent-foreground: hsl(25 45% 15%);
+            --border: hsl(42 20% 85%);
+            --input: hsl(42 15% 94%);
+            --ring: hsl(95 15% 55%);
+            --radius: 12px;
+        }
+
+        .dark {
+            --background: hsl(25 15% 8%);
+            --foreground: hsl(45 20% 95%);
+            --card: hsl(25 15% 10%);
+            --card-foreground: hsl(45 20% 95%);
+            --primary: hsl(95 15% 45%);
+            --primary-foreground: hsl(25 15% 8%);
+            --secondary: hsl(35 15% 25%);
+            --secondary-foreground: hsl(45 20% 95%);
+            --muted: hsl(25 15% 15%);
+            --muted-foreground: hsl(45 15% 65%);
+            --accent: hsl(25 15% 15%);
+            --accent-foreground: hsl(45 20% 95%);
+            --border: hsl(25 15% 20%);
+            --input: hsl(25 15% 15%);
+            --ring: hsl(95 15% 45%);
+        }
+
+        .transition-smooth {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .chatbot-overlay {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            z-index: 1000;
+            border: 1px solid var(--border);
+        }
+
+        .chatbot-overlay.show {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+
+        .progress-ring-fill {
+            transition: stroke-dashoffset 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-background text-foreground font-sans">
+    <!-- Navigation -->
+    <nav class="bg-background/95 backdrop-blur-sm border-b border-border sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                        <span class="text-primary-foreground font-bold text-lg">V</span>
+                    </div>
+                    <span class="text-xl font-semibold text-foreground">VidyaGrid</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-muted-foreground hover:text-foreground transition-smooth">Home</a>
+                    <a href="#features" class="text-muted-foreground hover:text-foreground transition-smooth">Features</a>
+                    <a href="#about" class="text-muted-foreground hover:text-foreground transition-smooth">About</a>
+                    <a href="#contact" class="text-muted-foreground hover:text-foreground transition-smooth">Contact</a>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <button id="adminLoginNav" class="px-4 py-2 text-sm font-medium text-secondary-foreground bg-secondary rounded-lg hover:bg-secondary/80 transition-smooth">
+                        Admin Login
+                    </button>
+                    <button id="studentLoginNav" class="px-4 py-2 text-sm font-medium text-primary-foreground bg-primary rounded-lg hover:bg-primary/80 transition-smooth">
+                        Student Login
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="homePage" class="min-h-screen">
+        <!-- Hero Section -->
+        <section class="py-20 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-8">
+                        <div class="space-y-4">
+                            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
+                                Empowering Students,
+                                <span class="text-primary">Enabling Success</span>
+                            </h1>
+                            <p class="text-lg text-muted-foreground leading-relaxed">
+                                VidyaGrid helps schools and students stay connected, track academic progress, and access personalized counseling through AI-driven insights — for brighter futures and stronger communities.
+                            </p>
+                        </div>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button id="adminLoginBtn" class="px-8 py-4 text-lg font-medium text-secondary-foreground bg-secondary rounded-xl hover:bg-secondary/80 transition-smooth shadow-lg hover:shadow-xl">
+                                Admin Login
+                            </button>
+                            <button id="studentLoginBtn" class="px-8 py-4 text-lg font-medium text-primary-foreground bg-primary rounded-xl hover:bg-primary/80 transition-smooth shadow-lg hover:shadow-xl">
+                                Student Login
+                            </button>
+                        </div>
+                        <div class="flex items-center space-x-8 text-sm text-muted-foreground">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-primary rounded-full"></div>
+                                <span>AI-Powered Insights</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-secondary rounded-full"></div>
+                                <span>Personalized Support</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <!-- Teacher and students in library setting from uploaded image -->
+                        <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+                            <img src="data:image/jpeg;base64,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" data-mock="true" alt="Teacher counseling students in library setting" class="w-full h-[500px] object-cover rounded-2xl shadow-2xl" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent rounded-2xl"></div>
+                        <div class="absolute bottom-6 left-6 text-white">
+                            <div class="flex items-center space-x-2 text-sm">
+                                <div class="w-2 h-2 bg-white rounded-full"></div>
+                                <span>Supporting Every Student's Journey</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+                        AI-Powered Student Success
+                    </h2>
+                    <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+                        Combining advanced analytics with compassionate support to ensure no student is left behind.
+                    </p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-card p-8 rounded-xl shadow-lg border border-border transition-smooth hover:shadow-xl">
+                        <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-6">
+                            <div class="w-6 h-6 bg-primary rounded"></div>
+                        </div>
+                        <h3 class="text-xl font-semibold text-card-foreground mb-4">Predictive Analytics</h3>
+                        <p class="text-muted-foreground">AI-driven insights identify at-risk students early, enabling timely interventions.</p>
+                    </div>
+                    <div class="bg-card p-8 rounded-xl shadow-lg border border-border transition-smooth hover:shadow-xl">
+                        <div class="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center mb-6">
+                            <div class="w-6 h-6 bg-secondary rounded"></div>
+                        </div>
+                        <h3 class="text-xl font-semibold text-card-foreground mb-4">Personalized Counseling</h3>
+                        <p class="text-muted-foreground">Tailored guidance and resources to support each student's unique needs.</p>
+                    </div>
+                    <div class="bg-card p-8 rounded-xl shadow-lg border border-border transition-smooth hover:shadow-xl">
+                        <div class="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-6">
+                            <div class="w-6 h-6 bg-primary rounded"></div>
+                        </div>
+                        <h3 class="text-xl font-semibold text-card-foreground mb-4">Real-time Support</h3>
+                        <p class="text-muted-foreground">24/7 AI chatbot provides immediate assistance and emotional support.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Login Page -->
+    <div id="loginPage" class="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-background hidden">
+        <div class="max-w-md w-full">
+            <div class="bg-card p-8 rounded-xl shadow-lg border border-border">
+                <div class="text-center mb-8">
+                    <div class="w-16 h-16 bg-primary rounded-xl flex items-center justify-center mx-auto mb-4">
+                        <span class="text-primary-foreground font-bold text-2xl">V</span>
+                    </div>
+                    <h2 id="loginTitle" class="text-2xl font-bold text-card-foreground">Admin Login</h2>
+                    <p class="text-muted-foreground mt-2">Welcome back to VidyaGrid</p>
+                </div>
+                <form class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-medium text-card-foreground mb-2">Email</label>
+                        <input type="email" class="w-full px-4 py-3 border border-border rounded-lg bg-input focus:ring-2 focus:ring-ring focus:border-transparent transition-smooth" placeholder="Enter your email" data-mock="true" />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-card-foreground mb-2">Password</label>
+                        <input type="password" class="w-full px-4 py-3 border border-border rounded-lg bg-input focus:ring-2 focus:ring-ring focus:border-transparent transition-smooth" placeholder="Enter your password" data-mock="true" />
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <label class="flex items-center">
+                            <input type="checkbox" class="rounded border-border" />
+                            <span class="ml-2 text-sm text-muted-foreground">Remember me</span>
+                        </label>
+                        <a href="#" class="text-sm text-primary hover:text-primary/80">Forgot password?</a>
+                    </div>
+                    <button type="submit" class="w-full px-4 py-3 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/80 transition-smooth">
+                        Sign In
+                    </button>
+                </form>
+                <div class="mt-6 text-center">
+                    <button id="backToHome" class="text-muted-foreground hover:text-foreground transition-smooth">
+                        ← Back to Home
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="adminDashboard" class="min-h-screen bg-background hidden">
+        <nav class="bg-card border-b border-border">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                            <span class="text-primary-foreground font-bold">V</span>
+                        </div>
+                        <span class="text-lg font-semibold">VidyaGrid Admin</span>
+                    </div>
+                    <button id="logoutAdmin" class="text-muted-foreground hover:text-foreground">Logout</button>
+                </div>
+            </div>
+        </nav>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-foreground mb-2">Dashboard Overview</h1>
+                <p class="text-muted-foreground">Monitor student progress and at-risk indicators</p>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="grid md:grid-cols-4 gap-6 mb-8">
+                <div class="bg-card p-6 rounded-xl shadow-lg border border-border">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-muted-foreground text-sm">Total Students</p>
+                            <p class="text-2xl font-bold text-card-foreground" data-mock="true">1,247</p>
+                        </div>
+                        <div class="w-10 h-10 bg-primary/10 rounded-lg"></div>
+                    </div>
+                </div>
+                <div class="bg-card p-6 rounded-xl shadow-lg border border-border">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-muted-foreground text-sm">At Risk</p>
+                            <p class="text-2xl font-bold text-destructive" data-mock="true">23</p>
+                        </div>
+                        <div class="w-10 h-10 bg-destructive/10 rounded-lg"></div>
+                    </div>
+                </div>
+                <div class="bg-card p-6 rounded-xl shadow-lg border border-border">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-muted-foreground text-sm">Success Rate</p>
+                            <p class="text-2xl font-bold text-primary" data-mock="true">94.2%</p>
+                        </div>
+                        <div class="w-10 h-10 bg-primary/10 rounded-lg"></div>
+                    </div>
+                </div>
+                <div class="bg-card p-6 rounded-xl shadow-lg border border-border">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-muted-foreground text-sm">Interventions</p>
+                            <p class="text-2xl font-bold text-secondary" data-mock="true">156</p>
+                        </div>
+                        <div class="w-10 h-10 bg-secondary/10 rounded-lg"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts and Alerts -->
+            <div class="grid lg:grid-cols-2 gap-8">
+                <div class="bg-card p-6 rounded-xl shadow-lg border border-border">
+                    <h3 class="text-lg font-semibold text-card-foreground mb-4">Risk Level Distribution</h3>
+                    <div class="h-64 bg-muted/20 rounded-lg flex items-center justify-center">
+                        <span class="text-muted-foreground" data-mock="true">Chart Placeholder</span>
+                    </div>
+                </div>
+                <div class="bg-card p-6 rounded-xl shadow-lg border border-border">
+                    <h3 class="text-lg font-semibold text-card-foreground mb-4">At-Risk Students</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between p-3 bg-muted/30 rounded-lg" data-mock="true">
+                            <div>
+                                <p class="font-medium">Sarah Johnson</p>
+                                <p class="text-sm text-muted-foreground">Attendance: 45% | Grade: D</p>
+                            </div>
+                            <span class="px-2 py-1 bg-destructive/10 text-destructive text-xs rounded">High Risk</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-muted/30 rounded-lg" data-mock="true">
+                            <div>
+                                <p class="font-medium">Mike Chen</p>
+                                <p class="text-sm text-muted-foreground">Attendance: 67% | Grade: C-</p>
+                            </div>
+                            <span class="px-2 py-1 bg-secondary/30 text-secondary text-xs rounded">Medium Risk</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-muted/30 rounded-lg" data-mock="true">
+                            <div>
+                                <p class="font-medium">Emma Davis</p>
+                                <p class="text-sm text-muted-foreground">Attendance: 72% | Grade: C</p>
+                            </div>
+                            <span class="px-2 py-1 bg-secondary/30 text-secondary text-xs rounded">Medium Risk</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Student Dashboard -->
+    <div id="studentDashboard" class="min-h-screen bg-background hidden">
+        <nav class="bg-card border-b border-border">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                            <span class="text-primary-foreground font-bold">V</span>
+                        </div>
+                        <span class="text-lg font-semibold">My Learning Journey</span>
+                    </div>
+                    <button id="logoutStudent" class="text-muted-foreground hover:text-foreground">Logout</button>
+                </div>
+            </div>
+        </nav>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-foreground mb-2">Welcome back, <span data-mock="true">Alex</span>!</h1>
+                <p class="text-muted-foreground">Track your progress and access personalized support</p>
+            </div>
+
+            <!-- Progress Overview -->
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-card p-6 rounded-xl shadow-lg border border-border">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-semibold text-card-foreground">Overall Progress</h3>
+                        <div class="relative w-16 h-16">
+                            <svg class="progress-ring w-16 h-16" viewBox="0 0 42 42">
+                                <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="hsl(42 20% 85%)" stroke-width="3"/>
+                                <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="hsl(95 15% 55%)" stroke-width="3" 
+                                        stroke-dasharray="75 25" stroke-dashoffset="0" class="progress-ring-fill"/>
+                            </svg>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <span class="text-sm font-bold" data-mock="true">78%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-sm text-muted-foreground">You're doing great! Keep up the good work.</p>
+                </div>
+                
+                <div class="bg-card p-6 rounded-xl shadow-lg border border-border">
+                    <h3 class="font-semibold text-card-foreground mb-2">Attendance</h3>
+                    <p class="text-2xl font-bold text-primary mb-1" data-mock="true">92%</p>
+                    <p class="text-sm text-muted-foreground">Excellent attendance this month</p>
+                </div>
+                
+                <div class="bg-card p-6 rounded-xl shadow-lg border border-border">
+                    <h3 class="font-semibold text-card-foreground mb-2">Current Grade</h3>
+                    <p class="text-2xl font-bold text-secondary mb-1" data-mock="true">B+</p>
+                    <p class="text-sm text-muted-foreground">↑ Improved from last semester</p>
+                </div>
+            </div>
+
+            <!-- Support Resources -->
+            <div class="grid lg:grid-cols-2 gap-8">
+                <div class="bg-card p-6 rounded-xl shadow-lg border border-border">
+                    <h3 class="text-lg font-semibold text-card-foreground mb-4">Recommended Resources</h3>
+                    <div class="space-y-4">
+                        <div class="p-4 bg-muted/30 rounded-lg" data-mock="true">
+                            <h4 class="font-medium">Math Study Group</h4>
+                            <p class="text-sm text-muted-foreground mt-1">Join peers for collaborative learning</p>
+                            <button class="mt-2 text-primary text-sm hover:text-primary/80">Learn More →</button>
+                        </div>
+                        <div class="p-4 bg-muted/30 rounded-lg" data-mock="true">
+                            <h4 class="font-medium">Time Management Workshop</h4>
+                            <p class="text-sm text-muted-foreground mt-1">Boost your productivity skills</p>
+                            <button class="mt-2 text-primary text-sm hover:text-primary/80">Register →</button>
+                        </div>
+                        <div class="p-4 bg-muted/30 rounded-lg" data-mock="true">
+                            <h4 class="font-medium">Career Counseling</h4>
+                            <p class="text-sm text-muted-foreground mt-1">Explore your future pathways</p>
+                            <button class="mt-2 text-primary text-sm hover:text-primary/80">Schedule →</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-card p-6 rounded-xl shadow-lg border border-border">
+                    <h3 class="text-lg font-semibold text-card-foreground mb-4">Recent Activities</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-3" data-mock="true">
+                            <div class="w-2 h-2 bg-primary rounded-full"></div>
+                            <span class="text-sm">Completed Physics Assignment #5</span>
+                        </div>
+                        <div class="flex items-center space-x-3" data-mock="true">
+                            <div class="w-2 h-2 bg-secondary rounded-full"></div>
+                            <span class="text-sm">Attended Chemistry Lab Session</span>
+                        </div>
+                        <div class="flex items-center space-x-3" data-mock="true">
+                            <div class="w-2 h-2 bg-primary rounded-full"></div>
+                            <span class="text-sm">Participated in Math Study Group</span>
+                        </div>
+                        <div class="flex items-center space-x-3" data-mock="true">
+                            <div class="w-2 h-2 bg-secondary rounded-full"></div>
+                            <span class="text-sm">Submitted English Essay Draft</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chatbot Button -->
+        <button id="chatbotToggle" class="fixed bottom-6 right-6 w-16 h-16 bg-primary text-primary-foreground rounded-full shadow-lg hover:shadow-xl transition-smooth z-50 flex items-center justify-center">
+            <span class="text-2xl">💬</span>
+        </button>
+    </div>
+
+    <!-- Chatbot Overlay -->
+    <div id="chatbotOverlay" class="chatbot-overlay">
+        <div class="bg-primary text-primary-foreground p-4 rounded-t-2xl flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 bg-primary-foreground/20 rounded-full flex items-center justify-center">
+                    <span class="text-sm">🤖</span>
+                </div>
+                <div>
+                    <h3 class="font-semibold">VidyaBot</h3>
+                    <p class="text-xs opacity-80">Your learning companion</p>
+                </div>
+            </div>
+            <button id="closeChatbot" class="text-primary-foreground/80 hover:text-primary-foreground">✕</button>
+        </div>
+        
+        <div class="flex-1 p-4 overflow-y-auto bg-background">
+            <div class="space-y-4">
+                <div class="bg-muted/30 p-3 rounded-lg max-w-xs" data-mock="true">
+                    <p class="text-sm">Hi Alex! I'm here to help with any questions or concerns you might have. How are you feeling about your studies today?</p>
+                </div>
+                <div class="bg-primary text-primary-foreground p-3 rounded-lg max-w-xs ml-auto" data-mock="true">
+                    <p class="text-sm">I'm a bit stressed about my upcoming math exam.</p>
+                </div>
+                <div class="bg-muted/30 p-3 rounded-lg max-w-xs" data-mock="true">
+                    <p class="text-sm">I understand that can be overwhelming. Let me suggest some study strategies and resources that might help. Would you like me to schedule some study sessions or connect you with tutoring support?</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="p-4 border-t border-border bg-background rounded-b-2xl">
+            <div class="flex space-x-2">
+                <input type="text" placeholder="Type your message..." class="flex-1 px-3 py-2 border border-border rounded-lg text-sm bg-input" data-mock="true" />
+                <button class="px-4 py-2 bg-primary text-primary-foreground rounded-lg text-sm hover:bg-primary/80 transition-smooth">
+                    Send
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-card border-t border-border py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                            <span class="text-primary-foreground font-bold text-lg">V</span>
+                        </div>
+                        <span class="text-xl font-semibold text-card-foreground">VidyaGrid</span>
+                    </div>
+                    <p class="text-muted-foreground">Empowering students and enabling success through AI-driven insights and compassionate support.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-card-foreground mb-4">Platform</h4>
+                    <ul class="space-y-2 text-muted-foreground">
+                        <li><a href="#" class="hover:text-foreground transition-smooth">Features</a></li>
+                        <li><a href="#" class="hover:text-foreground transition-smooth">Security</a></li>
+                        <li><a href="#" class="hover:text-foreground transition-smooth">Integration</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-card-foreground mb-4">Support</h4>
+                    <ul class="space-y-2 text-muted-foreground">
+                        <li><a href="#" class="hover:text-foreground transition-smooth">Documentation</a></li>
+                        <li><a href="#" class="hover:text-foreground transition-smooth">Help Center</a></li>
+                        <li><a href="#" class="hover:text-foreground transition-smooth">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-card-foreground mb-4">Legal</h4>
+                    <ul class="space-y-2 text-muted-foreground">
+                        <li><a href="#" class="hover:text-foreground transition-smooth">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-foreground transition-smooth">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-foreground transition-smooth">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-border mt-8 pt-8 text-center text-muted-foreground">
+                <p>&copy; 2024 VidyaGrid. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            // Page navigation
+            const pages = {
+                home: document.getElementById('homePage'),
+                login: document.getElementById('loginPage'),
+                admin: document.getElementById('adminDashboard'),
+                student: document.getElementById('studentDashboard')
+            };
+
+            function showPage(pageName) {
+                Object.values(pages).forEach(page => page.classList.add('hidden'));
+                pages[pageName].classList.remove('hidden');
+            }
+
+            // Navigation event listeners
+            document.getElementById('adminLoginBtn').addEventListener('click', () => {
+                document.getElementById('loginTitle').textContent = 'Admin Login';
+                showPage('login');
+            });
+
+            document.getElementById('studentLoginBtn').addEventListener('click', () => {
+                document.getElementById('loginTitle').textContent = 'Student Login';
+                showPage('login');
+            });
+
+            document.getElementById('adminLoginNav').addEventListener('click', () => {
+                document.getElementById('loginTitle').textContent = 'Admin Login';
+                showPage('login');
+            });
+
+            document.getElementById('studentLoginNav').addEventListener('click', () => {
+                document.getElementById('loginTitle').textContent = 'Student Login';
+                showPage('login');
+            });
+
+            document.getElementById('backToHome').addEventListener('click', () => {
+                showPage('home');
+            });
+
+            // Login form submission (mock)
+            document.querySelector('#loginPage form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const loginTitle = document.getElementById('loginTitle').textContent;
+                if (loginTitle.includes('Admin')) {
+                    showPage('admin');
+                } else {
+                    showPage('student');
+                }
+            });
+
+            // Logout buttons
+            document.getElementById('logoutAdmin').addEventListener('click', () => {
+                showPage('home');
+            });
+
+            document.getElementById('logoutStudent').addEventListener('click', () => {
+                showPage('home');
+            });
+
+            // Chatbot functionality
+            const chatbotToggle = document.getElementById('chatbotToggle');
+            const chatbotOverlay = document.getElementById('chatbotOverlay');
+            const closeChatbot = document.getElementById('closeChatbot');
+
+            chatbotToggle.addEventListener('click', () => {
+                chatbotOverlay.classList.add('show');
+            });
+
+            closeChatbot.addEventListener('click', () => {
+                chatbotOverlay.classList.remove('show');
+            });
+
+            // Mock chatbot interaction
+            const chatInput = chatbotOverlay.querySelector('input');
+            const sendButton = chatbotOverlay.querySelector('button');
+            
+            function addMessage(text, isUser = false) {
+                const messagesContainer = chatbotOverlay.querySelector('.space-y-4');
+                const messageDiv = document.createElement('div');
+                messageDiv.className = isUser 
+                    ? 'bg-primary text-primary-foreground p-3 rounded-lg max-w-xs ml-auto'
+                    : 'bg-muted/30 p-3 rounded-lg max-w-xs';
+                messageDiv.innerHTML = `<p class="text-sm">${text}</p>`;
+                messagesContainer.appendChild(messageDiv);
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }
+
+            sendButton.addEventListener('click', () => {
+                const message = chatInput.value.trim();
+                if (message) {
+                    addMessage(message, true);
+                    chatInput.value = '';
+                    
+                    // Mock bot response
+                    setTimeout(() => {
+                        const responses = [
+                            "I understand your concern. Let me help you with that.",
+                            "That's a great question! Here are some resources that might help.",
+                            "I'm here to support you. Would you like me to connect you with a counselor?",
+                            "You're doing great! Keep up the positive attitude."
+                        ];
+                        const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                        addMessage(randomResponse);
+                    }, 1000);
+                }
+            });
+
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    sendButton.click();
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

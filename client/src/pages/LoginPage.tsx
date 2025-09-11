@@ -29,7 +29,7 @@ export default function LoginPage() {
         <div className="bg-card p-8 rounded-xl shadow-lg border border-border">
           <div className="text-center mb-8">
             <div className="w-16 h-16 bg-primary rounded-xl flex items-center justify-center mx-auto mb-4">
-              <span className="text-primary-foreground font-bold text-2xl">V</span>
+              <span className="text-primary-foreground font-bold text-2xl">📚</span>
             </div>
             <h2 className="text-2xl font-bold text-card-foreground" data-testid="text-login-title">{title}</h2>
             <p className="text-muted-foreground mt-2">Welcome back to VidyaGrid</p>
@@ -66,7 +66,7 @@ export default function LoginPage() {
                 <Checkbox id="remember" />
                 <Label htmlFor="remember" className="text-sm text-muted-foreground">Remember me</Label>
               </div>
-              <a href="#" className="text-sm text-primary hover:text-primary/80">Forgot password?</a>
+              <a href="#" className="text-sm hover:text-primary/80">Forgot password?</a>
             </div>
             <Button 
               type="submit" 

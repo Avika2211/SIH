@@ -1,138 +1,161 @@
 import { useState } from "react";
+import { Bot, X, Send } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-interface ChatMessage {
+interface Message {
+  id: number;
   text: string;
-  isUser: boolean;
+  isBot: boolean;
+  timestamp: Date;
 }
 
-interface ChatbotProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
-
-export default function Chatbot({ isOpen, onClose }: ChatbotProps) {
-  const [messages, setMessages] = useState<ChatMessage[]>([
+export default function Chatbot() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [messages, setMessages] = useState<Message[]>([
     {
-      text: "✨ Hi Alex! I'm VidyaBot, your AI learning companion! 🤖 I'm here to help with any questions or concerns you might have. How are you feeling about your studies today? 🎓",
-      isUser: false
-    },
-    {
-      text: "I'm a bit stressed about my upcoming math exam. 😰",
-      isUser: true
-    },
-    {
-      text: "💖 I understand that can be overwhelming. Let me suggest some study strategies and resources that might help. Would you like me to schedule some study sessions or connect you with tutoring support? 📚✨",
-      isUser: false
+      id: 1,
+      text: "✨ Hello! I'm VidyaBot, your AI learning companion! 🤖 How can I help you with your studies today? 📚",
+      isBot: true,
+      timestamp: new Date()
     }
   ]);
-  const [inputMessage, setInputMessage] = useState("");
+  const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
 
-  const handleSendMessage = () => {
-    if (inputMessage.trim()) {
-      setMessages(prev => [...prev, { text: inputMessage, isUser: true }]);
-      setInputMessage("");
-      setIsTyping(true);
-      
-      // Mock bot response with typing indicator
-      setTimeout(() => {
-        const responses = [
-          "💡 I understand your concern. Let me help you with that! ✨",
-          "🎯 That's a great question! Here are some resources that might help. 📚",
-          "💖 I'm here to support you. Would you like me to connect you with a counselor? 🤝",
-          "🌟 You're doing great! Keep up the positive attitude! 🎉"
-        ];
-        const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-        setIsTyping(false);
-        setMessages(prev => [...prev, { text: randomResponse, isUser: false }]);
-      }, 2000);
-    }
+  const predefinedResponses: { [key: string]: string } = {
+    'services': 'We offer study plans, tutoring support, and personalized learning strategies.',
+    'math': 'For math, try breaking problems into smaller steps and practice regularly!',
+    'science': 'Science topics can be mastered by experimenting and reviewing key concepts frequently.',
+    'schedule': 'Would you like help setting up a study schedule for your subjects?',
+    'help': 'Feel free to ask me about study strategies, exam preparation, or stress management.'
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
+  const getBotResponse = (userMessage: string): string => {
+    const message = userMessage.toLowerCase();
+    for (const [keyword, response] of Object.entries(predefinedResponses)) {
+      if (message.includes(keyword)) {
+        return response;
+      }
+    }
+    if (message.includes('hello') || message.includes('hi')) {
+      return "Hello! I'm always here to assist you with your studies. What would you like to learn today?";
+    }
+    if (message.includes('thank')) {
+      return "You're welcome! Keep studying and reach out if you need more help.";
+    }
+    return "I'm here to help! Ask me about study strategies, scheduling, or subject-related queries.";
+  };
+
+  const handleSendMessage = () => {
+    if (!inputValue.trim()) return;
+
+    const userMessage: Message = {
+      id: messages.length + 1,
+      text: inputValue,
+      isBot: false,
+      timestamp: new Date()
+    };
+
+    setMessages(prev => [...prev, userMessage]);
+    setInputValue('');
+    setIsTyping(true);
+
+    setTimeout(() => {
+      const botResponse: Message = {
+        id: messages.length + 2,
+        text: getBotResponse(userMessage.text),
+        isBot: true,
+        timestamp: new Date()
+      };
+      setMessages(prev => [...prev, botResponse]);
+      setIsTyping(false);
+    }, 1500);
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
       handleSendMessage();
     }
   };
 
-  if (!isOpen) return null;
-
   return (
-    <div className="fixed bottom-24 right-6 w-[calc(100%-1rem)] sm:w-80 h-[60vh] sm:h-96 bg-card/95 backdrop-blur-sm border border-border rounded-2xl shadow-2xl z-40 flex flex-col bounce-in hover-glow" data-testid="chatbot-overlay">
-      <div className="bg-gradient-to-r from-primary to-secondary text-primary-foreground p-4 rounded-t-2xl flex items-center justify-between pulse-glow">
-        <div className="flex items-center space-x-3 fade-in-left animate">
-          <div className="w-8 h-8 bg-primary-foreground/20 rounded-full flex items-center justify-center heartbeat">
-            <span className="text-sm">🤖</span>
-          </div>
-          <div>
-            <h3 className="font-semibold shimmer elegant-text">✨ VidyaBot</h3>
-            <p className="text-xs opacity-80 premium-text">💖 Your AI learning companion</p>
-          </div>
-        </div>
-        <Button 
-          variant="ghost"
-          size="sm"
-          onClick={onClose}
-          className="text-primary-foreground/80 hover:text-primary-foreground p-2 hover-glow ripple"
-          data-testid="button-close-chatbot"
-        >
-          ❌
-        </Button>
-      </div>
-      
-      <div className="flex-1 p-4 overflow-y-auto bg-background/50 backdrop-blur-sm animated-gradient-bg">
-        <div className="space-y-4">
-          {messages.map((message, index) => (
-            <div 
-              key={index} 
-              className={`p-3 rounded-lg max-w-xs bounce-in hover-glow ${
-                message.isUser 
-                  ? 'bg-gradient-to-r from-primary to-secondary text-primary-foreground ml-auto shadow-lg' 
-                  : 'bg-card/90 backdrop-blur-sm shadow-lg border border-border'
-              }`}
-              data-testid={`message-${index}`}
-            >
-              <p className="text-sm">{message.text}</p>
-            </div>
-          ))}
-          {isTyping && (
-            <div className="p-3 rounded-lg max-w-xs bg-card/90 backdrop-blur-sm shadow-lg border border-border bounce-in">
-              <div className="flex items-center space-x-2">
-                <div className="flex space-x-1">
-                  <div className="w-2 h-2 bg-primary rounded-full heartbeat"></div>
-                  <div className="w-2 h-2 bg-secondary rounded-full heartbeat" style={{animationDelay: '0.2s'}}></div>
-                  <div className="w-2 h-2 bg-primary rounded-full heartbeat" style={{animationDelay: '0.4s'}}></div>
-                </div>
-                <span className="text-xs text-muted-foreground shimmer">🤖 VidyaBot is typing...</span>
+    <>
+      {/* Chatbot toggle button */}
+      {/* Chatbot Button - Bottom Right */}
+      <Button
+        onClick={() => setIsOpen(!isOpen)}
+        className="fixed bottom-6 right-6 w-16 h-16 bg-primary text-primary-foreground rounded-full shadow-lg hover:shadow-xl transition-smooth z-[50] p-0 fab hover-glow ripple pulse-glow heartbeat"
+        data-testid="button-chatbot-toggle"
+      >
+        {isOpen ? <X className="w-6 h-6" /> : <Bot className="w-6 h-6" />}
+        <span className="text-2xl bounce-in">🤖</span>
+      </Button>
+
+      {/* Chatbot window */}
+      {isOpen && (
+        <div className="fixed bottom-24 right-6 z-40 w-80 h-[60vh] bg-card/95 backdrop-blur-sm border border-border rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-fade-in">
+          {/* Header */}
+          <div className="bg-gradient-to-r from-primary to-secondary text-primary-foreground p-4 rounded-t-2xl flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <div className="w-8 h-8 bg-primary-foreground/20 rounded-full flex items-center justify-center">
+                
+              </div>
+              <div>
+                <h3 className="font-semibold">✨ VidyaBot</h3>
+                <p className="text-xs opacity-80">Your AI learning companion</p>
               </div>
             </div>
-          )}
+            <Button variant="ghost" size="sm" onClick={() => setIsOpen(false)}>
+            </Button>
+          </div>
+
+          {/* Messages */}
+          <div className="flex-1 p-4 overflow-y-auto bg-background/50 backdrop-blur-sm space-y-4">
+            {messages.map((message) => (
+              <div
+                key={message.id}
+                className={`max-w-xs p-3 rounded-lg ${
+                  message.isBot
+                    ? 'bg-card/90 backdrop-blur-sm border border-border text-sm'
+                    : 'bg-gradient-to-r from-primary to-secondary text-primary-foreground ml-auto shadow-lg'
+                }`}
+              >
+                <p>{message.text}</p>
+                <p className="text-[10px] text-muted-foreground mt-1 text-right">
+                  {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                </p>
+              </div>
+            ))}
+            {isTyping && (
+              <div className="max-w-xs p-3 rounded-lg bg-card/90 backdrop-blur-sm border border-border text-sm flex items-center space-x-2">
+                <div className="flex space-x-1">
+                  <div className="w-2 h-2 bg-primary rounded-full animate-bounce"></div>
+                  <div className="w-2 h-2 bg-secondary rounded-full animate-bounce delay-100"></div>
+                  <div className="w-2 h-2 bg-primary rounded-full animate-bounce delay-200"></div>
+                </div>
+                <span className="text-xs text-muted-foreground">Typing...</span>
+              </div>
+            )}
+          </div>
+
+          {/* Input */}
+          <div className="p-4 border-t border-border bg-background/95 backdrop-blur-sm rounded-b-2xl">
+            <div className="flex space-x-2">
+              <Input
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                onKeyDown={handleKeyPress}
+                placeholder="Type your message..."
+                className="flex-1 text-sm hover-glow"
+              />
+              <Button onClick={handleSendMessage} size="sm" className="px-4 hover-glow ripple pulse-glow">
+                🚀 Send
+              </Button>
+            </div>
+          </div>
         </div>
-      </div>
-      
-      <div className="p-4 border-t border-border bg-background/95 backdrop-blur-sm rounded-b-2xl">
-        <div className="flex space-x-2">
-          <Input 
-            type="text"
-            placeholder="✨ Type your message..."
-            value={inputMessage}
-            onChange={(e) => setInputMessage(e.target.value)}
-            onKeyDown={handleKeyDown}
-            className="flex-1 text-sm hover-glow"
-            data-testid="input-chatbot-message"
-          />
-          <Button 
-            onClick={handleSendMessage}
-            size="sm"
-            className="px-4 hover-glow ripple pulse-glow"
-            data-testid="button-send-message"
-          >
-            🚀 Send
-          </Button>
-        </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 }
