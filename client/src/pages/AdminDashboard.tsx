@@ -16,9 +16,65 @@ export default function AdminDashboard() {
   const [selectedStudent, setSelectedStudent] = useState<any | null>(null);
   const [isGradeModalOpen, setIsGradeModalOpen] = useState(false);
 
+  const query = [
+    {
+      name: "Aruna Sinha",
+      attendance: "2 min ago",
+      grade: "Physics lab resistance box is not working",
+      risk: "",
+      gradeBreakdown: {
+        practicalMarks: 40,
+        theoryGrade: 50,
+        classPerformance: 55,
+        interactivityGrade: 45,
+        teacherComments: "Needs to improve consistency and participation.",
+      },
+    }
+  ];
+  const finaid = [
+    {
+      name: "Pragati Scholarship for Girls (AICTE)",
+      attendance: "Active",
+      grade: "Till 2028",
+      risk: "Only female students",
+      gradeBreakdown: {
+        practicalMarks: 40,
+        theoryGrade: 50,
+        classPerformance: 55,
+        interactivityGrade: 45,
+        teacherComments: "Needs to improve consistency and participation.",
+      },
+    },
+    {
+      name: "INSPIRE Scholarship (DST)",
+      attendance: "Active",
+      grade: "No End Date",
+      risk: "Students scoring 80% or above",
+      gradeBreakdown: {
+        practicalMarks: 65,
+        theoryGrade: 70,
+        classPerformance: 60,
+        interactivityGrade: 68,
+        teacherComments: "Good effort, but theory understanding needs work.",
+      },
+    },
+    {
+      name: "Post Matric Scholarship for SC/ST/OBC/Minority Students",
+      attendance: "Active",
+      grade: "Class 10-12",
+      risk: "SC/ST/OBC/Minority Students",
+      gradeBreakdown: {
+        practicalMarks: 75,
+        theoryGrade: 70,
+        classPerformance: 72,
+        interactivityGrade: 74,
+        teacherComments: "Decent performance, but can push for higher grades.",
+      },
+    },
+  ];
   const atRiskStudents = [
     {
-      name: "Sarah Johnson",
+      name: "Rohan Deshmukh",
       attendance: "45%",
       grade: "D",
       risk: "High",
@@ -31,7 +87,7 @@ export default function AdminDashboard() {
       },
     },
     {
-      name: "Mike Chen",
+      name: "Ananya Singh",
       attendance: "67%",
       grade: "C-",
       risk: "Medium",
@@ -44,7 +100,7 @@ export default function AdminDashboard() {
       },
     },
     {
-      name: "Emma Davis",
+      name: "Ishita Nair",
       attendance: "72%",
       grade: "C",
       risk: "Medium",
@@ -57,6 +113,7 @@ export default function AdminDashboard() {
       },
     },
   ];
+  
 
   const [, setLocation] = useLocation();
 
@@ -76,7 +133,7 @@ export default function AdminDashboard() {
               <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center pulse-glow ">
                 <Wrench className="w-4 h-4 text-primary-foreground" />
               </div>
-              <span className="text-lg font-semibold">VidyaGrid Admin</span>
+              <span className="text-lg font-semibold">VidyaVerse Admin</span>
             </div>
             <Button
               variant="ghost"
@@ -194,7 +251,7 @@ export default function AdminDashboard() {
             <CardContent>
               <div className="h-64 bg-muted/20 rounded-lg flex items-center justify-center animated-gradient-bg overflow-hidden">
                 <img
-                  src="/images/risk-distribution.png" // ✅ replace with your image path
+                  src="\yo.png" // ✅ replace with your image path
                   alt="Risk Level Distribution Chart"
                   className="object-contain h-full"
                 />
@@ -240,6 +297,94 @@ export default function AdminDashboard() {
                       }`}
                     >
                       {student.risk} Risk
+                    </Badge>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="card-3d hover-glow">
+            <CardHeader>
+              <CardTitle>Active Financial Aids </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {finaid.map((student, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center justify-between p-3 bg-muted/30 rounded-lg hover-glow card-3d"
+                    data-testid={`row-student-${index}`}
+                  >
+                    <div>
+                      <button
+                        onClick={() => {
+                          setSelectedStudent(student);
+                          setIsGradeModalOpen(true);
+                        }}
+                        className="font-medium text-left hover:underline cursor-pointer"
+                      >
+                        {student.name}
+                      </button>
+                      <p className="text-sm text-muted-foreground">
+                        Status: {student.attendance} | Validity:{" "}
+                        {student.grade}
+                      </p>
+                    </div>
+                    <Badge
+                      variant={
+                        student.risk === "High" ? "destructive" : "secondary"
+                      }
+                      className={`${
+                        student.risk === "High"
+                          ? "bg-destructive/10 text-destructive pulse-glow"
+                          : "bg-secondary/30 text-secondary"
+                      }`}
+                    >
+                      {student.risk} 
+                    </Badge>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="card-3d hover-glow">
+            <CardHeader>
+              <CardTitle>Student Queries and Feedback</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {query.map((student, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center justify-between p-3 bg-muted/30 rounded-lg hover-glow card-3d"
+                    data-testid={`row-student-${index}`}
+                  >
+                    <div>
+                      <button
+                        onClick={() => {
+                          setSelectedStudent(student);
+                          setIsGradeModalOpen(true);
+                        }}
+                        className="font-medium text-left hover:underline cursor-pointer"
+                      >
+                        {student.name}
+                      </button>
+                      <p className="text-sm text-muted-foreground">
+                        Time: {student.attendance} | Issue:{" "}
+                        {student.grade}
+                      </p>
+                    </div>
+                    <Badge
+                      variant={
+                        student.risk === "High" ? "destructive" : "secondary"
+                      }
+                      className={`${
+                        student.risk === "High"
+                          ? "bg-destructive/10 text-destructive pulse-glow"
+                          : "bg-secondary/30 text-secondary"
+                      }`}
+                    >
+                      {student.risk} 
                     </Badge>
                   </div>
                 ))}

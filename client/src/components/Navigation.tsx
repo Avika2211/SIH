@@ -12,7 +12,7 @@ export default function Navigation() {
             <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center pulse-glow heartbeat">
               <span className="text-primary-foreground font-bold text-lg">🎓</span>
             </div>
-            <span className="text-xl font-semibold text-foreground shimmer royal-heading">VidyaGrid</span>
+            <span className="text-xl font-semibold text-foreground shimmer royal-heading">VidyaVerse</span>
           </div>
           <div className="hidden md:flex items-center space-x-8 bounce-in">
             <a href="#home" className="text-muted-foreground hover:text-foreground transition-smooth duration-100 p-2 rounded-lg hover:scale-[1.2] hover:bg-[#c0bb91]"> Home</a>
@@ -24,17 +24,24 @@ export default function Navigation() {
             <Button 
               onClick={() => setLocation("/login/admin")}
               variant="secondary"
-              className="px-4 py-2 text-sm font-medium hover-glow ripple text-gray-200"
+              className="px-4 py-2 text-sm font-medium  ripple bg-[#81726A] text-gray-300 hover:bg-[#4e4641] hover:shadow-lg hover:shadow-[#81726A] transition-smooth"
               data-testid="button-nav-admin-login"
             >
                Admin Login
             </Button>
             <Button 
               onClick={() => setLocation("/login/student")}
-              className="px-4 py-2 text-sm font-medium hover-glow ripple "
+              className="px-4 py-2 text-sm font-medium  ripple bg-[#81726A] text-gray-300 hover:bg-[#4e4641] hover:shadow-lg hover:shadow-[#81726A] transition-smooth"
               data-testid="button-nav-student-login"
             >
               Student Login
+            </Button>
+            <Button 
+              onClick={() => setLocation("/login/teacher")}
+              className="px-4 py-2 text-sm font-medium  ripple d bg-[#81726A] text-gray-300 hover:bg-[#4e4641] hover:shadow-lg hover:shadow-[#81726A] transition-smooth"
+              data-testid="button-nav-student-login"
+            >
+              Teacher Login
             </Button>
           </div>
         </div>

@@ -33,15 +33,15 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8 fade-in-left animate">
               <div className="space-y-4">
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight typewriter ">
-                  Empowering Students,
-                  <span className="text-primary  elegant-text">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight typewriter ">
+                  Empowering Education,<br></br>
+                  <span className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight typewriter">
                     {" "}
                     Enabling Success
                   </span>
                 </h1>
                 <p className="text-lg text-muted-foreground leading-relaxed ">
-                  VidyaGrid helps schools and students stay connected, track
+                  VidyaVerse helps schools and students stay connected, track
                   academic progress, and access personalized counseling through
                   AI-driven insights — for brighter futures and stronger
                   communities.
@@ -61,6 +61,13 @@ export default function HomePage() {
                   data-testid="button-student-login"
                 >
                   Student Login
+                </Button>
+                <Button
+                  onClick={() => setLocation("/login/teacher")}
+                  className="px-8 py-4 text-lg font-medium bg-secondary text-secondary-foreground hover:bg-primary/80 transition-smooth shadow-lg hover:shadow-xl hover-glow hover:scale-[1.03] "
+                  data-testid="button-student-login"
+                >
+                  Teacher Login
                 </Button>
               </div>
               <div className="flex items-center space-x-8 text-sm text-muted-foreground fade-in-up animate">
@@ -126,7 +133,7 @@ export default function HomePage() {
             </div>
 
             <div
-              className="group flex flex-col items-center justify-center bg-card/90 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-border card-3d overflow-hidden hover:bg-[#a2d9ab] relative"
+              className="group flex flex-col items-center justify-center bg-card/90 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-border card-3d overflow-hidden relative"
               data-testid="card-feature-counseling"
             >
               <div
@@ -143,7 +150,7 @@ export default function HomePage() {
             </div>
 
             <div
-              className="group flex flex-col items-center justify-center bg-card/90 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-border card-3d overflow-hidden hover:bg-[#a2d9ab] relative"
+              className="group flex flex-col items-center justify-center bg-card/90 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-border card-3d overflow-hidden relative"
               data-testid="card-feature-support"
             >
 
@@ -175,7 +182,7 @@ export default function HomePage() {
             </span>
           </div>
           <span className="text-xl font-semibold text-card-foreground shimmer ">
-            VidyaGrid
+            VidyaVerse
           </span>
         </div>
         <p className="text-muted-foreground ">
@@ -279,7 +286,7 @@ export default function HomePage() {
     </div>
     <div className="border-t border-border mt-8 pt-8 text-center text-muted-foreground fade-in-up animate">
       <p className="shimmer premium-text">
-        © 2024 VidyaGrid. All rights reserved. Made with love for
+        © 2024 VidyaVerse. All rights reserved. Made with love for
         students everywhere!
       </p>
     </div>

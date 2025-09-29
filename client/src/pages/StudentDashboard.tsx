@@ -54,10 +54,10 @@ export default function StudentDashboard() {
   });
 
   const todos = [
-    { task: "Review student performance reports", done: false },
-    { task: "Prepare intervention strategies", done: true },
-    { task: "Schedule parent-teacher meetings", done: false },
-    { task: "Update risk prediction model", done: false },
+    { task: "Do Math Homework", done: false },
+    { task: "Prepare for Nukkad Natak on Monday", done: true },
+    { task: "Ask Riya Ma'am for help in Cell Diagram", done: false },
+    { task: "Complete SST Assignment", done: false },
   ];
   const resources = [
     {
@@ -71,7 +71,7 @@ export default function StudentDashboard() {
       action: "Register",
     },
     {
-      title: "Career Counseling",
+      title: "Career Counseling and Personality test",
       description: "Explore your future pathways",
       action: "Schedule",
     },
@@ -347,7 +347,7 @@ export default function StudentDashboard() {
                     </div>
                   </div>
                   <div className="bg-muted/20 p-4 rounded-lg">
-                    <h4 className="font-semibold text-card-foreground mb-2 educational-text text-[#d7dea2]">
+                    <h4 className="font-semibold text-card-foreground mb-2 educational-text text-[#FFFFFF]">
                       💭 Teacher's Comments
                     </h4>
                     <p
@@ -361,7 +361,19 @@ export default function StudentDashboard() {
               </DialogContent>
             </Dialog>
           </div>
-
+          <Card className="text-center rounded-full fill-corner card-3d hover-glow group">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between mb-4 group-hover:text-white">
+                <h3 className="font-semibold text-card-foreground group-hover:text-white">
+                  📚 Homework Completion
+                </h3>
+                <ProgressRing percentage={62.5} />
+              </div>
+              <p className="text-sm text-muted-foreground group-hover:text-white">
+                Keep up the momentum to finish your assignments on time!</p>
+            </CardContent>
+          </Card>
+          <br></br>
           {/* Support Resources */}
           <div className="grid lg:grid-cols-3 gap-8 fade-in-up animate">
             <Card className="card-3d hover-glow">
@@ -459,6 +471,21 @@ export default function StudentDashboard() {
               </CardContent>
             </Card>
           </div>
+          <br></br>
+          
+          <br></br>
+          <Card className="text-center rounded-full fill-corner card-3d hover-glow group">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between mb-4 group-hover:text-white">
+                <h3 className="font-semibold text-card-foreground group-hover:text-white">
+                  $ Active Financial Aid
+                </h3>
+                <div className="flex items-center justify-between mb-4 group-hover:text-white"><h3 className="font-semibold text-card-foreground group-hover:text-white"> Pragati Scholarship for Girls (AICTE)</h3></div>
+              </div>
+              <p className="text-sm text-muted-foreground group-hover:text-white">
+                You are covered with a scholarship!</p>
+            </CardContent>
+          </Card>
           <br></br>
           {/* Student Feedback Section */}
           <div className="mb-8 fade-in-up animate">

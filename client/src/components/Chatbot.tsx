@@ -25,7 +25,7 @@ export default function Chatbot() {
 
   const predefinedResponses: { [key: string]: string } = {
     'services': 'We offer study plans, tutoring support, and personalized learning strategies.',
-    'math': 'For math, try breaking problems into smaller steps and practice regularly!',
+    'math': 'For math, try breaking problems into smaller steps and practice regularly! For trigonometry, specifically, you can check out Khan Academys Modules. Here is the link check it out: https://www.khanacademy.org/math/trigonometry ',
     'science': 'Science topics can be mastered by experimenting and reviewing key concepts frequently.',
     'schedule': 'Would you like help setting up a study schedule for your subjects?',
     'help': 'Feel free to ask me about study strategies, exam preparation, or stress management.'

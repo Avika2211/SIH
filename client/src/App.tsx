@@ -8,6 +8,7 @@ import LoginPage from "@/pages/LoginPage";
 import AdminDashboard from "@/pages/AdminDashboard";
 import StudentDashboard from "@/pages/StudentDashboard";
 import NotFound from "@/pages/not-found";
+import TeacherDashboard from "./pages/TeacherDashboard";
 
 function Router() {
   return (
@@ -16,6 +17,7 @@ function Router() {
       <Route path="/login/:userType" component={LoginPage} />
       <Route path="/admin" component={AdminDashboard} />
       <Route path="/student" component={StudentDashboard} />
+      <Route path="/teacher" component={TeacherDashboard } />
       <Route component={NotFound} />
     </Switch>
   );
